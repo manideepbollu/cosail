@@ -1,0 +1,23 @@
+development:
+  clients:
+    default:
+      database: icare_development
+      hosts:
+        - localhost:27017
+
+test:
+  clients:
+    default:
+      database: icare_test
+      hosts:
+        - localhost:27017
+
+staging:
+  clients:
+    default:
+      uri: <%= ENV['MONGOLAB_URI'] %>
+
+production:
+  clients:
+    default:
+      uri: <%= ENV['MONGOLAB_URI'] %>
