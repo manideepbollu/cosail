@@ -22,6 +22,7 @@ footer {
   li {
     display: block;
     margin-bottom: 10px;
+    float: right;
 
     &:last-child {
       margin-bottom: 0;
@@ -31,6 +32,8 @@ footer {
       display: block;
       clear: both;
       margin-bottom: 10px;
+      margin-top: -10px;
+      float: left;
     }
   }
 }

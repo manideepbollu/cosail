@@ -27,8 +27,8 @@
 .navbar-brand-logo {
   position: relative;
   display: inline-block !important;
-  top: 4px;
-  @include size(38px, 15px);
+  top: -5px;
+  height: 25px;
   vertical-align: top;
 }
 

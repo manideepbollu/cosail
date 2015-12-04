@@ -3,21 +3,21 @@ footer
     ul.list-inline.list-footer
       li.diowa-footer
         = link_to 'http://diowa.com' do
-          = image_tag cosail_footer_logo, alt: 'diowa', width: 80, title: 'CoSail'
-      - if user_signed_in?
-        li= link_to t('about'), :about
-        li= link_to t('how_it_works'), :how_it_works
-        - unless APP_CONFIG.demo_mode
-          li= link_to t('terms'), :terms
+          = image_tag cosail_footer_logo, alt: 'diowa', width: 70, title: 'CoSail'
       - if user_signed_in?
         li
           span.fa.fa-bullhorn<>
           = link_to Feedback.model_name.human(count: :lot), feedbacks_url
         - if APP_CONFIG.demo_mode
           li
-            = link_to user_path(current_user), method: :delete, class: 'text-danger', data: { confirm: t('helpers.links.confirm') } do
+            = link_to user_path(current_user), method: :delete, class: 'text-danger', data: {confirm: t('helpers.links.confirm')} do
               span.fa.fa-times<>
               = t('delete_account')
+      - unless APP_CONFIG.demo_mode
+        li= link_to t('terms'), :terms
+      li= link_to t('how_it_works'), :how_it_works
+      li= link_to t('about'), :about
+
       - if APP_CONFIG.demo_mode
         li
           span.fa.fa-warning<>
