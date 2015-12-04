@@ -17,6 +17,10 @@ module ApplicationHelper
     end
   end
 
+  def cosail_footer_logo
+    'cosail-footer-logo.png'
+  end
+
   def transparent_gif_image_data
     'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
   end

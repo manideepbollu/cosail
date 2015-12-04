@@ -7,7 +7,7 @@
 #splashscreen
   #splashscreen-container
     h1
-      = APP_CONFIG.app_name
+      = image_tag 'cosail-logo.png', alt: 'CoSail', width: 300, title: 'CoSail', class: 'cosail-home-logo'
       - if APP_CONFIG.demo_mode
         '
         small demo
@@ -43,15 +43,17 @@
       span.fa.fa-leaf
       h3= t('.help_environment_title')
       p= t('.help_environment_content')
-  APP_CONFIG.repository_url)).html_safe
 .container
   .ribbon-container
     .ribbon
       .ribbon-content
         h2= t('.join_us_today')
   .row
-    .col-sm-6
+    .col-sm-3
       #facepile-container
         .fb-facepile data-size='medium' data-max-rows='1'
-    .col-sm-6== render 'facebook_login'
+    .col-sm-6.text-center== render 'facebook_login'
+    .col-sm-3
+      #facepile-container
+        .fb-facepile data-size='medium' data-max-rows='1'
   == render 'shared/modal_why_facebook'
