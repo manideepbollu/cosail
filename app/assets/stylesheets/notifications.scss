@@ -99,7 +99,11 @@ $background: lighten($brand-success, 5%);
     left: 50%;
     margin: 0 0 0 -75px;
     li {
-      float: right;
+      float: left;
     }
   }
+}
+
+#navbar-notifications {
+  float: right;
 }
