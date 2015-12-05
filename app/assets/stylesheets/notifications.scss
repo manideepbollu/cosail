@@ -5,6 +5,7 @@ $background: lighten($brand-success, 5%);
 
 .navbar-default .navbar-nav > li.notifications {
   position: relative;
+  margin-top: 5px;
   &.read > a {
     color: fade-out(darken($navbar-default-bg, 40%), 0.55);
   }
@@ -98,7 +99,7 @@ $background: lighten($brand-success, 5%);
     left: 50%;
     margin: 0 0 0 -75px;
     li {
-      float: left;
+      float: right;
     }
   }
 }

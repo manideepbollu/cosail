@@ -27,8 +27,8 @@
 .navbar-brand-logo {
   position: relative;
   display: inline-block !important;
-  top: -5px;
-  height: 25px;
+  top: -7px;
+  height: 40px;
   vertical-align: top;
 }
 
@@ -41,8 +41,18 @@
   }
 }
 
+@media=all {
+  .navbar{
+    min-height: 50px;
+  }
+}
+
 @media (min-width: $grid-float-breakpoint) {
   .navbar-default {
     background-color: fade-out($navbar-default-bg, 0.1);
   }
+}
+
+.navbar-profile-container{
+  margin-top: 5px;
 }
