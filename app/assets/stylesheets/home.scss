@@ -92,8 +92,16 @@ html,
 }
 
 .btn-signup{
-  @extend .btn-learn-more;
   @extend .btn-signin;
+  border: 2px solid fade-out(white, 0.75);
+  color: white;
+  background-color: fade-out(black, 0.85);
+  &:hover,
+  &:focus {
+    border-color: fade-out(white, 0.6);
+    color: white;
+    background-color: fade-out(black, 0.65);
+  }
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.9);
 }
 
@@ -101,6 +109,7 @@ html,
   border-radius: 5px;
   box-shadow: none;
   text-shadow: none;
+  width: 100%;
 }
 
 .btn-learn-more {
@@ -238,4 +247,17 @@ html,
 
 .cosail-home-logo {
   margin-bottom: -25px;
+}
+
+.btn-toolbar > .col-sm-3 {
+  padding: 5px;
+}
+
+.btn-toolbar > .col-sm-6 {
+  padding: 5px;
+}
+
+.btn {
+  margin: 5px 0;
+  font-weight: lighter;
 }

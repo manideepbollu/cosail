@@ -3,8 +3,8 @@
 
 SimpleConfig.for :application do
   group :facebook do
-    set :namespace, 'NAMESPACE'
-    set :app_id, 'FACEBOOK_APP_ID'
-    set :secret, 'FACEBOOK_SECRET'
+    set :namespace, 'sailingmadesimple'
+    set :app_id, '200689230270283'
+    set :secret, '129124a3bfc04039a2e3eabecd63852f'
   end
 end

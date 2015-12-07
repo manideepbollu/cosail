@@ -1,9 +1,13 @@
-.btn-toolbar
-  = link_to 'Sign up', '#',class: 'btn btn-lg btn-signup'
-  = link_to 'Login', '#',class: 'btn btn-lg btn-signin btn-info'
-  = link_to user_omniauth_authorize_path(provider: :facebook), class: 'btn btn-lg btn-fb', data: { no_turbolink: true } do
-    span.fa.fa-facebook-square<>
-    = t('login_with_facebook')
+.row.btn-toolbar
+  .col-sm-3
+    = link_to 'Sign up', '#',class: 'btn btn-lg btn-signup'
+  .col-sm-3
+    = link_to 'Login', '#', class: 'btn btn-lg btn-signin btn-info'
+  .col-sm-6
+    = link_to user_omniauth_authorize_path(provider: :facebook), class: 'btn btn-lg btn-fb', data: {no_turbolink: true} do
+      span.fa.fa-facebook-square<>
+      = t('login_with_facebook')
+
 p.signin-terms
   b= t('we_will_never_post')
   br
