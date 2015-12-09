@@ -73,6 +73,7 @@ class User
 
   # Extra
   field :username
+  field :password
   field :gender
   field :bio
   field :languages, type: Array, default: []
@@ -109,6 +110,10 @@ class User
 
   def first_name
     @first_name ||= name.split[0] if name?
+  end
+
+  def last_name
+    @last_name ||= name.split[1] if name.count(' ') > 0
   end
 
   def to_s
