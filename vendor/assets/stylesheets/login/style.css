@@ -8001,7 +8001,8 @@ body.md-skin {
 }
 
 .btn-fb-login,
-.btn-fb-login:active {
+.btn-fb-login:active,
+.btn-fb-login:focus {
   background-color: #3b5998;
   color: #fff;
 }
