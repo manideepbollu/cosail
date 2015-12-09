@@ -2,8 +2,20 @@ class UsersController < ApplicationController
 
   before_action :set_user_as_current_user, only: [:update, :dashboard, :settings, :itineraries]
 
+  before_action :authenticate_user!, :except => [:new, :create]
+
+  layout 'login', only: [:new]
+
   def show
     @user = find_user params[:id]
+  end
+
+  def new
+    @user = User.new
+  end
+
+  def create
+
   end
 
   def update

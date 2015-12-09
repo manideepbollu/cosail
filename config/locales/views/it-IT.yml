@@ -195,6 +195,14 @@ it-IT:
         login_as: Loggati come
 
   users:
+    new:
+      sign_up: Sign up
+      full_ame: Full Name
+      email: Email
+      password: Password
+      repeat_password: Repeat Password
+      gender: Gender
+      join: Join!
     banned:
       title: Account sospeso
       you_were_banned: Sei stato sospeso!

@@ -2,6 +2,7 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Paranoia
+  include ActiveModel::SecurePassword
 
   # Concerns
   include ::Concerns::User::Authentication
@@ -13,8 +14,8 @@ class User
          #:recoverable, :rememberable, :trackable, :validatable
 
   ## Database authenticatable
-  field :email,              type: String, default: ""
-  # field :encrypted_password, type: String, default: ""
+  field :email, type: String
+  field :password_digest, type: String
 
   ## Recoverable
   # field :reset_password_token,   type: String
@@ -62,18 +63,11 @@ class User
   field :oauth_expires_at
   field :facebook_permissions, type: Hash, default: {}
 
-  # Cached Facebook data
-  field :facebook_friends, type: Array, default: []
-  field :facebook_favorites, type: Array, default: []
-  field :facebook_data_cached_at, type: DateTime, default: '2012-09-06'
-
   # Info
   field :name
-  field :facebook_verified, type: Boolean, default: false
 
   # Extra
   field :username
-  field :password
   field :gender
   field :bio
   field :languages, type: Array, default: []
@@ -103,6 +97,19 @@ class User
   validates :time_zone, inclusion: ActiveSupport::TimeZone.zones_map(&:name).keys, allow_blank: true
   validates :vehicle_avg_consumption, numericality: { greater_than: 0, less_than: 10 }, presence: true
   # validates :access_level, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }
+
+  #Validates the presence of name and email
+  validates :name, presence: true
+  VALID_EMAIL_REGEX = /\A[\w]+[\w+\-.]*@[\w\-]+(\.[\w\-]+)*\.[a-z]+\z/i
+  validates :email, presence: true, length: { maximum: 255 },
+            format: { with: VALID_EMAIL_REGEX },
+            uniqueness: { case_sensitive: false }
+
+
+  #Implements Secure Password from ActiveModel of Rails
+  has_secure_password
+  validates :password, presence: true, length: { minimum: 6 }
+
 
   def age
     ((Time.now.to_s(:number).to_i - birthday.to_time.to_s(:number).to_i) / 10e9.to_i) if birthday?

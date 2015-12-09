@@ -192,6 +192,14 @@ en-US:
         login_as: Login as
 
   users:
+    new:
+      sign_up: Sign up
+      full_ame: Full Name
+      email: Email
+      password: Password
+      repeat_password: Repeat Password
+      gender: Gender
+      join: Join!
     banned:
       title: Suspended account
       you_were_banned: You were banned!

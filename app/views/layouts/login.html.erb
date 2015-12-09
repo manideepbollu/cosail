@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join CoSail</title>
+    <%= stylesheet_link_tag    'login', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag    'login', media: 'all', 'data-turbolinks-track' => true %>
+
+    <!-- Fontawesome CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <%= javascript_include_tag 'login', 'data-turbolinks-track' => true %>
+</head>
+
+<body class="gray-bg">
+
+<div class="middle-box text-center loginscreen animated fadeInDown <%= 'middleboxlogin' if controller_name == 'sessions' %> ">
+    <div>
+        <div>
+
+            <h1 class="logo-name"><%= image_tag 'cosail-logo-gray.png', alt: 'CoSail', width: 300, title: 'CoSail', class: 'cosail-home-logo' %></h1>
+        </div>
+        <%= yield %>
+    </div>
+</div>
+
+<%= yield :javascript %>
+
+</body>
+
+<% content_for :javascript do %>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
+</script>
+
+<% end %>
+
+</html>

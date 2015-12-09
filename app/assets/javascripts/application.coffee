@@ -32,6 +32,7 @@
 
 # ALL THE REST
 #= require_tree .
+#= stub login
 
 window.icare = window.icare || {}
 icare = window.icare

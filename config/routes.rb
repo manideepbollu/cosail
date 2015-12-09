@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :notifications, only: :index
 
-  resources :users, constraints: { id: /[A-Za-z0-9\.]+/ }, only: [:show, :update, :destroy] do
+  resources :users, constraints: { id: /[A-Za-z0-9\.]+/ }, only: [:create ,:show, :update, :destroy] do
     get :itineraries, on: :member
     resources :references, only: [:show, :new, :create, :update, :index]
   end
@@ -48,4 +48,8 @@ Rails.application.routes.draw do
   get :demo_terms, to: 'pages#demo_terms'
   get :fbjssdk_channel, to: 'pages#fbjssdk_channel'
   post :report_uri, to: 'pages#report_uri'
+
+  get :signup, to: 'users#new'
+  get :login, to: 'sessions#new'
+
 end

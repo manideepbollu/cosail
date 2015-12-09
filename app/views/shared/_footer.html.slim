@@ -22,3 +22,5 @@ footer
         li
           span.fa.fa-warning<>
           = t('demo_mode')
+
+  = debug(params) if Rails.env.development?

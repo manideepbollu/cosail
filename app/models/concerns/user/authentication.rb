@@ -50,12 +50,12 @@ module Concerns
         def set_info(info)
           self.email = info.email
           self.name = info.name
-          self.facebook_verified = info.verified || false
+          self.gender = info.gender if info.gender != nil
         end
 
         def set_extra_raw_info(raw_info)
           self.username = raw_info.username
-          self.gender = raw_info.gender
+          self.gender = raw_info.gender if self.gender == nil
           self.bio = raw_info.bio
           self.languages = raw_info.languages || []
         end
@@ -78,7 +78,8 @@ module Concerns
           where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
             user.provider = auth.provider
             user.uid = auth.uid
-            user.password = Devise.friendly_token[0,20]
+            user.password = 'facebook'
+            user.password_confirmation = 'facebook'
             user.set_fields_from_omniauth auth
             user.save!
           end
