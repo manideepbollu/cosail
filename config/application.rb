@@ -29,5 +29,6 @@ module Icare
     config.i18n.enforce_available_locales = false
     config.i18n.default_locale = :'en-US'
     config.i18n.available_locales = %i(en-US it-IT)
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
   end
 end
