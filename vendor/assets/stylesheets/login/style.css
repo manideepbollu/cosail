@@ -3796,6 +3796,15 @@ table.table-mail tr td {
 .black-bg {
   background-color: #262626;
 }
+
+.cosailblue-bg {
+  background-color: #ecf0f1;
+}
+
+.loginlayout-bluetext {
+  color: #3D7098;
+}
+
 .panel-primary {
   border-color: #1ab394;
 }
