@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_scope :user do
-    delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
+    # delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
   end
 
   root to: 'pages#home'
@@ -48,8 +48,5 @@ Rails.application.routes.draw do
   get :demo_terms, to: 'pages#demo_terms'
   get :fbjssdk_channel, to: 'pages#fbjssdk_channel'
   post :report_uri, to: 'pages#report_uri'
-
-  get :signup, to: 'users#new'
-  get :login, to: 'sessions#new'
 
 end

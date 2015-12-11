@@ -12,12 +12,20 @@ class PermittedParams < Struct.new(:params, :current_user)
     basic_fields
   end
 
-  def user
-    params.require(:user).permit(*user_attributes)
+  def create_user
+    params.require(:user).permit(*create_user_attributes)
   end
 
-  def user_attributes
-    [:time_zone, :locale, :vehicle_avg_consumption]
+  def create_user_attributes
+    [:name, :email, :password, :password_confirmation, :gender, :birthday]
+  end
+
+  def update_user
+    params.require(:user).permit(*update_user_attributes)
+  end
+
+  def update_user_attributes
+    [:time_zone, :locale, :vehicle_avg_consumption, :send_email_messages, :send_email_references]
   end
 
   def feedback

@@ -4371,7 +4371,7 @@ body.mini-navbar.fixed-sidebar .logo-element {
   padding-top: 110px;
 }
 .loginscreen.middle-box {
-  width: 300px;
+  width: 350px;
 }
 .loginColumns {
   max-width: 800px;
@@ -8010,6 +8010,54 @@ body.md-skin {
 .btn-fb-login:hover {
   background-color: #3c4d98;
   color: #fff;
+}
+
+#error_explanation > ul > li {
+  font-size: smaller;
+  text-align: left;
+}
+
+#error_explanation > ul {
+  padding: 0 30px;
+}
+
+#error_explanation {
+  padding: 5px 20px;
+  border-radius: 5px;
+  margin: 10px 0;
+  background-color: #F5F5F5;
+}
+
+#error_explanation > h2 {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.login-flash {
+  padding: 15px;
+  text-align: center;
+  font-weight: lighter;
+}
+
+#flash_error {
+  background-color: #8a6d3b;
+  color: white;
+}
+
+#flash_alert {
+  background-color: #908B80;
+  color: white;
+}
+
+#flash_notice {
+  background-color: ##20ADAF;
+  color: white;
+}
+
+a.text-muted:hover,
+a.text-muted:focus {
+  color: #666;
 }
 
 @media (min-width: 768px) {

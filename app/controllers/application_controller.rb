@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   around_action :set_locale
   around_action :set_user_time_zone, if: :user_signed_in?
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   helper_method :permitted_params
 
   protected
@@ -27,6 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_user(param)
+    return User.find(param) if User.where(username_or_uid: param).blank?
     User.find_by(username_or_uid: param)
   end
 
@@ -41,5 +44,11 @@ class ApplicationController < ActionController::Base
 
   def permitted_params
     @permitted_params ||= PermittedParams.new(params, current_user)
+  end
+
+  protected
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << [:name, :gender, :birthday]
+    devise_parameter_sanitizer.for(:account_update) << :name
   end
 end

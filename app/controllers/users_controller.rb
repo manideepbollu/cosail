@@ -4,22 +4,20 @@ class UsersController < ApplicationController
 
   before_action :authenticate_user!, :except => [:new, :create]
 
-  layout 'login', only: [:new]
+  layout 'devise', only: [:new, :create]
 
   def show
     @user = find_user params[:id]
   end
 
   def new
-    @user = User.new
   end
 
   def create
-
   end
 
   def update
-    if @user.update_attributes(permitted_params.user)
+    if @user.update_attributes(permitted_params.update_user)
       redirect_to :settings, flash: { success: t('flash.users.success.update') }
     else
       render :settings

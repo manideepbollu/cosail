@@ -17,6 +17,10 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { host: APP_CONFIG.mailer.host }
 
+  # Configure mailer to use SMTP service provided by FakeSMTP
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 2525 }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

@@ -11,10 +11,14 @@
     <!-- Fontawesome CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-  <%= javascript_include_tag 'login', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </head>
 
 <body class="cosailblue-bg">
+
+<%= content_tag(:div, flash[:error], :id => "flash_error", :class => 'login-flash') if flash[:error] %>
+<%= content_tag(:div, flash[:notice], :id => "flash_notice", :class => 'login-flash') if flash[:notice] %>
+<%= content_tag(:div, flash[:alert], :id => "flash_alert", :class => 'login-flash') if flash[:alert] %>
 
 <div class="middle-box text-center loginscreen animated fadeInDown <%= 'middleboxlogin' if controller_name == 'sessions' %> ">
     <div>
@@ -26,20 +30,26 @@
     </div>
 </div>
 
-<%= yield :javascript %>
-
 </body>
 
 <% content_for :javascript do %>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
+
+        $('#data_1 .input-group.date').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+            dateFormat: 'dd/mm/yyyy'
         });
+
     });
 </script>
 
 <% end %>
+
+<%= yield :javascript %>
 
 </html>

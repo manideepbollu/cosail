@@ -1,0 +1,16 @@
+<h3 class="loginlayout-bluetext">Don't worry!</h3>
+<p>We could help you unlocking your account</p>
+
+<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+  <%= devise_error_messages! %>
+
+    <div class="form-group">
+      <%= f.text_field :email, class: 'form-control', placeholder: 'email', type: 'email', required: '' %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Resend unlock instructions", class: "btn btn-primary block full-width m-b" %>
+    </div>
+<% end %>
+
+<%= link_to 'Go Back', :back, class: 'text-muted' %>

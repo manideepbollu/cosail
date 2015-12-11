@@ -30,9 +30,11 @@
 #= require i18n
 #= require i18n/translations
 
+# Login Layout
+#= require datapicker/bootstrap-datepicker
+
 # ALL THE REST
 #= require_tree .
-#= stub login
 
 window.icare = window.icare || {}
 icare = window.icare

@@ -1,0 +1,18 @@
+<h3 class="loginlayout-bluetext">Don't worry!</h3>
+<p>We can resend the confirmation instructions</p>
+
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+  <%= devise_error_messages! %>
+
+    <div class="form-group">
+      <%= f.text_field :email, class: 'form-control', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), placeholder: 'email', type: 'email', required: '' %>
+    </div>
+
+  </div>
+
+    <div class="actions">
+      <%= f.submit "Resend confirmation instructions", class: "btn btn-primary block full-width m-b" %>
+    </div>
+<% end %>
+
+<%= link_to 'Go Back', :back, class: 'text-muted' %>
