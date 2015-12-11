@@ -24,7 +24,7 @@ SimpleConfig.for :application do
 
   group :mailer do
     set :from, "\"Cosail\" <no-reply@i.care>"
-    set :host, 'heroku.com'
+    set :host, 'cosail.herokuapp.com'
 
     group :smtp_settings do
       set :address, 'smtp.sendgrid.net'
