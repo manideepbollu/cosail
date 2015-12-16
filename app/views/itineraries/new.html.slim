@@ -1,3 +1,74 @@
+javascript:
+  var startMarker;
+  var endMarker;
+  var map;
+  var totalMarkers = [];
+  var routePath;
+
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('new-itinerary-map'), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom: 5,
+      maxZoom: 10
+    });
+  }
+
+  function setStartMarker(lat, lon, label) {
+    var latLng = {lat: lat, lng: lon};
+    map.setCenter(latLng);
+    if (startMarker != null)
+      startMarker.setMap(null);
+    startMarker = new google.maps.Marker({
+      position: latLng,
+      map: map,
+      title: label,
+      animation: google.maps.Animation.DROP
+    });
+    adjustBoundaries();
+  }
+
+  function setEndMarker(lat, lon, label) {
+    var latLng = {lat: lat, lng: lon};
+    map.setCenter(latLng);
+    if (endMarker != null)
+      endMarker.setMap(null);
+    endMarker = new google.maps.Marker({
+      position: latLng,
+      map: map,
+      title: label,
+      animation: google.maps.Animation.DROP
+    });
+    adjustBoundaries();
+  }
+
+  function adjustBoundaries() {
+    var bounds = new google.maps.LatLngBounds();
+    if (startMarker != null)
+      bounds.extend(startMarker.getPosition());
+    if (endMarker != null)
+      bounds.extend(endMarker.getPosition());
+    map.fitBounds(bounds);
+    if (routePath != null)
+      routePath.setMap(null);
+  }
+
+  function drawRoute(data) {
+    var routeCoordinates = data;
+    adjustBoundaries();
+    routePath = new google.maps.Polyline({
+      path: routeCoordinates,
+      geodesic: true,
+      strokeColor: '#FF0000',
+      strokeOpacity: 1.0,
+      strokeWeight: 2
+    });
+    routePath.setMap(map);
+    document.getElementById("itineraries-spinner").className = "hide";
+    $("#result").slideDown("slow", function () {
+      // Animation complete.
+    });
+  }
+
 - title t('.title')
 .container
   - if @itinerary.errors.any?
@@ -38,3 +109,6 @@
         = button_tag t('.previous_step'), type: 'button', class: 'btn btn-lg btn-default', name: 'back_button', id: 'wizard-prev-step-button', disabled: true
         = f.submit t('.next_step'), type: 'button', class: 'btn btn-lg btn-primary', name: 'next_button', id: 'wizard-next-step-button', disabled: false
         = f.submit t('.confirm_and_share'), class: 'btn btn-lg btn-primary', id: 'new_itinerary_submit', disabled: true, data: { disable_with: t('helpers.disable_with') }
+| <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkEQUnCf2y4-7L8ONawU_mmO5hJsXCmzg&callback=initMap">
+          </script>
