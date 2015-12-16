@@ -28,6 +28,9 @@ class Itinerary
   field :leave_date, type: DateTime
   field :return_date, type: DateTime
   field :daily, type: Boolean, default: false
+  field :start_port_id, type: String
+  field :end_port_id, type: String
+
 
   # Cached user details (for filtering purposes)
   field :driver_gender

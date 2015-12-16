@@ -1,7 +1,13 @@
 .row
   .col-sm-4
-    = f.text_field :start_address
-    = f.text_field :end_address
+    = f.text_field :start_address, id: 'custom_start_address', autocomplete: 'off'
+    .coords id='start_coords'
+      = 'Coordinates: '
+    = f.text_field :end_address, id: 'custom_end_address', autocomplete: 'off'
+    .coords id='end_coords'
+      = 'Coordinates: '
+    = f.hidden_field :start_port_id
+    = f.hidden_field :end_port_id
     .form-group
       = f.check_box :avoid_highways
       = f.check_box :avoid_tolls
@@ -44,3 +50,105 @@
       = t('.hint_search_before_title')
     p
       = t('.hint_search_before_content', search_link: (link_to t('.search_link'), itineraries_path)).html_safe
+
+javascript:
+    $(document).ready(function() {
+
+      var suggestArr = [];
+
+      $("input#custom_start_address").autocomplete({
+        source: function (request, response) {
+          autoCompleteSource(request);
+          response(suggestArr);
+        },
+        minLength: 4,
+        select: function (event, ui) {
+          event.preventDefault();
+          $("input#itinerary_start_port_id").val(ui.item.value);
+          $("input#custom_start_address").val(ui.item.label);
+          $("#start_coords").html('Coords: '+ui.item.coords);
+          suggestArr = [];
+        }
+      });
+
+      $("input#custom_end_address").autocomplete({
+        source: function(request, response) {
+          autoCompleteSource(request);
+          response (suggestArr);
+        },
+        minLength: 4,
+        select: function (event, ui) {
+          event.preventDefault();
+          $("input#itinerary_end_port_id").val(ui.item.value);
+          $("input#custom_end_address").val(ui.item.label);
+          $("#end_coords").html('Coords: '+ui.item.coords);
+          suggestArr = [];
+        }
+      });
+
+      function autoCompleteSource(request) {
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:3000/testing/new.json?sp=" + request.term, // change to full path of file on server
+          dataType: "json",
+          success: parseJson,
+          failure: function (data) {
+            console.log("XML File could not be found");
+          }
+        });
+      }
+
+      function parseJson(data) {
+
+        var count = data.length;
+        suggestArr = [];
+        for (var i = 0; i < count; i++) {
+          suggestArr.push({
+            label: data[i].name+' - '+data[i].nationality,
+            value: data[i].portId,
+            coords: data[i].lon+', '+data[i].lat
+          });
+        }
+        console.log(suggestArr);
+      }
+
+      // Changes XML to JSON
+      function xmlToJson(xml) {
+
+        // Create the return object
+        var obj = {};
+
+        if (xml.nodeType == 1) { // element
+          // do attributes
+          if (xml.attributes.length > 0) {
+            obj["@attributes"] = {};
+            for (var j = 0; j < xml.attributes.length; j++) {
+              var attribute = xml.attributes.item(j);
+              obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+            }
+          }
+        } else if (xml.nodeType == 3) { // text
+          obj = xml.nodeValue;
+        }
+
+        // do children
+        if (xml.hasChildNodes()) {
+          for (var i = 0; i < xml.childNodes.length; i++) {
+            var item = xml.childNodes.item(i);
+            var nodeName = item.nodeName;
+            if (typeof(obj[nodeName]) == "undefined") {
+              obj[nodeName] = xmlToJson(item);
+            } else {
+              if (typeof(obj[nodeName].push) == "undefined") {
+                var old = obj[nodeName];
+                obj[nodeName] = [];
+                obj[nodeName].push(old);
+              }
+              obj[nodeName].push(xmlToJson(item));
+            }
+          }
+        }
+        return obj;
+      }
+
+  });

@@ -17,6 +17,7 @@ html lang=I18n.locale.to_s data-currency=APP_CONFIG.currency data-fuel-currency=
     /! Placed at the top of the document 'cause of turbolinks
     = javascript_include_tag '//maps.googleapis.com/maps/api/js?sensor=true&libraries=geometry', 'application', 'data-turbolinks-track' => true
     = analytics_init if APP_CONFIG.google_analytics_id.present?
+    = javascript_include_tag 'http://code.jquery.com/ui/1.10.3/jquery-ui.js'
 
     /[if lt IE 9]
       = javascript_include_tag '//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js', 'respond.js'
@@ -27,3 +28,5 @@ html lang=I18n.locale.to_s data-currency=APP_CONFIG.currency data-fuel-currency=
     = yield
 
     == render 'shared/footer'
+
+    == yield :page_level_javascript

@@ -1,0 +1,17 @@
+[{
+	"name": "Jeddah",
+	"portId": "438",
+	"nationality": "Saudi Arabia",
+	"locode": "SAJED",
+	"flagid": "187",
+	"lon": 39.15659141540527,
+	"lat": 21.488025665283203
+}, {
+	"name": "Apenrade",
+	"portId": "236",
+	"nationality": "Denmark",
+	"locode": "DKAAB",
+	"flagid": "62",
+	"lon": 9.42600107192993,
+	"lat": 55.0422630310059
+}]

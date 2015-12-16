@@ -1,4 +1,7 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :port do
+    
+  end
+
 
   sequence(:uid)      { |n| "100#{n}" }
   sequence(:username) { |n| "person#{n}" }
