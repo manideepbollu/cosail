@@ -40,6 +40,78 @@
       = t('.hint_search_before_content', search_link: (link_to t('.search_link'), itineraries_path)).html_safe
 
 javascript:
+  /**
+   * Created by alwaysbollu on 16/12/15.
+   */
+  var startMarker;
+  var endMarker;
+  var map;
+  var totalMarkers = [];
+  var routePath;
+
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('new-itinerary-map'), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom: 5,
+      maxZoom: 10
+    });
+  }
+
+  function setStartMarker(lat, lon, label) {
+    var latLng = {lat: lat, lng: lon};
+    map.setCenter(latLng);
+    if (startMarker != null)
+      startMarker.setMap(null);
+    startMarker = new google.maps.Marker({
+      position: latLng,
+      map: map,
+      title: label,
+      animation: google.maps.Animation.DROP
+    });
+    adjustBoundaries();
+  }
+
+  function setEndMarker(lat, lon, label) {
+    var latLng = {lat: lat, lng: lon};
+    map.setCenter(latLng);
+    if (endMarker != null)
+      endMarker.setMap(null);
+    endMarker = new google.maps.Marker({
+      position: latLng,
+      map: map,
+      title: label,
+      animation: google.maps.Animation.DROP
+    });
+    adjustBoundaries();
+  }
+
+  function adjustBoundaries() {
+    var bounds = new google.maps.LatLngBounds();
+    if (startMarker != null)
+      bounds.extend(startMarker.getPosition());
+    if (endMarker != null)
+      bounds.extend(endMarker.getPosition());
+    map.fitBounds(bounds);
+    if (routePath != null)
+      routePath.setMap(null);
+  }
+
+  function drawRoute(data) {
+    var routeCoordinates = data;
+    adjustBoundaries();
+    routePath = new google.maps.Polyline({
+      path: routeCoordinates,
+      geodesic: true,
+      strokeColor: '#FF0000',
+      strokeOpacity: 1.0,
+      strokeWeight: 2
+    });
+    routePath.setMap(map);
+    document.getElementById("itineraries-spinner").className = "hide";
+    $("#result").slideDown("slow", function () {
+      // Animation complete.
+    });
+  }
     $(document).ready(function() {
 
       var suggestArr = [];
@@ -127,75 +199,3 @@ javascript:
       });
 
   });
-    /**
-     * Created by alwaysbollu on 16/12/15.
-     */
-    var startMarker;
-    var endMarker;
-    var map;
-    var totalMarkers = [];
-    var routePath;
-
-    function initMap() {
-      map = new google.maps.Map(document.getElementById('new-itinerary-map'), {
-        center: {lat: -34.397, lng: 150.644},
-        zoom: 5,
-        maxZoom: 10
-      });
-    }
-
-    function setStartMarker(lat, lon, label) {
-      var latLng = {lat: lat, lng: lon};
-      map.setCenter(latLng);
-      if(startMarker != null)
-        startMarker.setMap(null);
-      startMarker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-        title: label,
-        animation: google.maps.Animation.DROP
-      });
-      adjustBoundaries();
-    }
-
-    function setEndMarker(lat, lon, label) {
-      var latLng = {lat: lat, lng: lon};
-      map.setCenter(latLng);
-      if(endMarker != null)
-        endMarker.setMap(null);
-      endMarker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-        title: label,
-        animation: google.maps.Animation.DROP
-      });
-      adjustBoundaries();
-    }
-
-    function adjustBoundaries(){
-      var bounds = new google.maps.LatLngBounds();
-      if(startMarker != null)
-        bounds.extend(startMarker.getPosition());
-      if(endMarker != null)
-        bounds.extend(endMarker.getPosition());
-      map.fitBounds(bounds);
-      if (routePath != null)
-        routePath.setMap(null);
-    }
-
-    function drawRoute(data){
-      var routeCoordinates = data;
-      adjustBoundaries();
-      routePath = new google.maps.Polyline({
-        path: routeCoordinates,
-        geodesic: true,
-        strokeColor: '#FF0000',
-        strokeOpacity: 1.0,
-        strokeWeight: 2
-      });
-      routePath.setMap(map);
-      document.getElementById("itineraries-spinner").className = "hide";
-      $("#result").slideDown("slow", function () {
-        // Animation complete.
-      });
-    }

@@ -10,7 +10,7 @@ class PortsController < ApplicationController
 
   def route
     require 'net/http'
-    html_url = URI.parse("http://www.vesseltracker.com/en/RoutingVD.html?chosenNumberOfRoutes=ONE&fromPortId=#{params[:fport]}&speed=20&toPortId=#{params[:tport]}")
+    html_url = URI.parse("https://www.vesseltracker.com/en/RoutingVD.html?chosenNumberOfRoutes=ONE&fromPortId=#{params[:fport]}&speed=20&toPortId=#{params[:tport]}")
     html_req = Net::HTTP::Get.new(html_url.to_s)
     html_res = Net::HTTP.start(html_url.host, html_url.port) {|http|
       http.request(html_req)
@@ -26,9 +26,7 @@ class PortsController < ApplicationController
 
     final_hash = {distance: formatted_distance, duration: formatted_duration}
 
-
-
-    xml_url = URI.parse('http://www.vesseltracker.com/app?component=%24RoutingOSMPolygone.%24XTile&page=RoutingVD&service=xtile')
+    xml_url = URI.parse('https://www.vesseltracker.com/app?component=%24RoutingOSMPolygone.%24XTile&page=RoutingVD&service=xtile')
     xml_req = Net::HTTP::Get.new(xml_url.to_s)
     xml_req['Cookie'] = @html_cookie
     xml_res = Net::HTTP.start(xml_url.host, xml_url.port) {|http|
