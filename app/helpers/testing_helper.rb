@@ -5,7 +5,7 @@ module TestingHelper
     count = 0
       open('ports.out', 'w') { |f|
         ('aaa'..'zzz').to_a.each do |i|
-          if(count >= 7134)
+          if count >= 7134
             url = URI.parse("http://www.vesseltracker.com/app?component=%24VesseltrackerSuggest.%24XTile&page=RoutingVD&service=xtile&sp=#{i}")
             req = Net::HTTP::Get.new(url.to_s)
             res = Net::HTTP.start(url.host, url.port) {|http|
