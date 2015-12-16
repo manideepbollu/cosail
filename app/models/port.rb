@@ -15,8 +15,7 @@ class Port
   field :lon
   field :lat
 
-  index({ name: 1 }, { unique: true, background: true })
-  index({ portId: 1 }, { unique: true, drop_dups: true, background: true })
+  index({ portId: 1 }, { unique: true, drop_dups: true, name: 'portId_index' })
 
   def self.load_from_json(filename)
     data = ''
@@ -29,6 +28,19 @@ class Port
     else
       puts 'Loading failed!'
     end
+  end
+
+  def self.eliminate_duplicates()
+    seen = []
+    Port.each do |port|
+      if seen.include?(port.portId)
+        port.delete
+      else
+        seen.push(port.portId)
+        puts port.portId
+      end
+    end
+    Port.save
   end
 
 end
