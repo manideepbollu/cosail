@@ -15,6 +15,9 @@ class Port
   field :lon
   field :lat
 
+  index({ name: 1 }, { unique: true, background: true })
+  index({ portId: 1 }, { unique: true, drop_dups: true, background: true })
+
   def self.load_from_json(filename)
     data = ''
     f = File.open(filename, "r")
