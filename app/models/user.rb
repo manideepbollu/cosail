@@ -156,4 +156,7 @@ class User
     gender == 'Female'
   end
 
+  def facebook?
+    provider == 'facebook'
+  end
 end

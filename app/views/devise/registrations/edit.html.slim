@@ -1,0 +1,110 @@
+/<h2>Edit <%= resource_name.to_s.humanize %></h2>
+/
+/<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+/  <%= devise_error_messages! %>
+/
+/  <div class="field">
+/    <%= f.label :email %><br />
+/    <%= f.email_field :email, autofocus: true %>
+/  </div>
+/
+/  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+/    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+/  <% end %>
+/
+/  <div class="field">
+/    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+/    <%= f.password_field :password, autocomplete: "off" %>
+/  </div>
+/
+/  <div class="field">
+/    <%= f.label :password_confirmation %><br />
+/    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+/  </div>
+/
+/  <div class="field">
+/    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+/    <%= f.password_field :current_password, autocomplete: "off" %>
+/  </div>
+/
+/  <div class="actions">
+/    <%= f.submit "Update" %>
+/  </div>
+/<% end %>
+/
+/<h3>Cancel my account</h3>
+/
+/<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+/
+/<%= link_to "Back", :back %>
+
+- title 'Edit User'
+.container
+  == render 'shared/flash_messages'
+  .page-header
+    h1= yield :title
+  p.lead= 'Only available for traditional users, details of facebook users are in sync with Facebook.'
+  = bootstrap_form_for resource, as: resource_name, url: registration_path(resource_name), validate: true, html: {class: 'form-horizontal'} do |f|
+    = devise_error_messages!
+    legend= 'Change email'
+    fieldset
+    .form-group class=('has-error' if @user.errors.include?(:email))
+      = f.label :email, class: 'control-label col-sm-2'
+      .col-sm-10
+        .input-group.input-group-edituser
+          = f.default_tag :email_field, :email, class: 'form-control'
+          span.input-group-addon
+            i.fa.fa-at
+        - if @user.errors.include?(:email)
+          span.help-block
+            = @user.errors.messages[:email].join(', ')
+        p.help-block
+          = 'You can keep this field unchanged if you do not wish to change your registered email address.'
+          br
+          small
+            = 'Note: It is not recommended to change your email address frequently. Moreover, you may not be able to access your account until you verify your new email address.'
+    legend= 'Change Password'
+    fieldset
+      .form-group class=('has-error' if @user.errors.include?(:password_field))
+        = f.label :password, class: 'control-label col-sm-2'
+        .col-sm-10
+          .input-group.input-group-edituser
+            = f.default_tag :password_field, :password, class: 'form-control', autocomplete: "off"
+            span.input-group-addon
+              i.fa.fa-pencil
+          - if @user.errors.include?(:password)
+            span.help-block
+              = @user.errors.messages[:password].join(', ')
+      .form-group class=('has-error' if @user.errors.include?(:password_confirmation))
+        = f.label :password_confirmation, class: 'control-label col-sm-2'
+        .col-sm-10
+          .input-group.input-group-edituser
+            = f.default_tag :password_field, :password_confirmation, class: 'form-control', autocomplete: "off"
+            span.input-group-addon
+              i.fa.fa-pencil-square
+          - if @user.errors.include?(:password_confirmation)
+            span.help-block
+              = @user.errors.messages[:password_confirmation].join(', ')
+      .form-group class=('has-error' if @user.errors.include?(:current_password))
+        = f.label :current_password, class: 'control-label col-sm-2'
+        .col-sm-10
+          .input-group.input-group-edituser
+            = f.default_tag :password_field, :current_password, class: 'form-control', autocomplete: "off"
+            span.input-group-addon
+              i.fa.fa-key
+          - if @user.errors.include?(:current_password)
+            span.help-block
+              = @user.errors.messages[:current_password].join(', ')
+      .form-group= f.button type: 'submit', class: 'btn btn-primary', method: :put
+  legend= 'Unhappy with us?'
+  fieldset
+    .text-center
+      .form-group
+        = button_to 'Delete my account', registration_path(resource_name), class: 'btn btn-danger', data: {confirm: 'Are you sure?'}, method: :delete
+        p.help-block
+          = 'Please mail us for any assistance '
+          = link_to 'helpme@cosail.com', ''
+          = '.'
+          br
+          small
+            = 'Note: This action is irreversible. All the data associated with the user will be lost and cannot be recovered.'

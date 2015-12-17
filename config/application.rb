@@ -30,5 +30,10 @@ module Icare
     config.i18n.default_locale = :'en-US'
     config.i18n.available_locales = %i(en-US it-IT)
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+    config.to_prepare do
+      Devise::RegistrationsController.layout proc{ |controller| action_name == 'edit' ? "application"   : "devise" }
+    end
   end
 end
+
+
