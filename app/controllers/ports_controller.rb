@@ -1,10 +1,12 @@
 class PortsController < ApplicationController
   def suggest
-    port_name = params[:sp].capitalize
-    @bson = Port.where(name: /#{port_name}/)
-    @json_response = @bson.to_a.to_json
+    data = ''
+    f = File.open('portslist.json', "r")
+    f.each_line do |line|
+      data += line
+    end
     respond_to do |format|
-      format.json { render json: @json_response }
+      format.json { render json: data }
     end
   end
 

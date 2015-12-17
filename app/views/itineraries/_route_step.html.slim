@@ -40,89 +40,80 @@
       = t('.hint_search_before_content', search_link: (link_to t('.search_link'), itineraries_path)).html_safe
 
 javascript:
-    $(document).ready(function() {
+  $(document).ready(function() {
 
-      var suggestArr = [];
+    var suggestArr = [];
 
+    $.ajax({
+      type: "GET",
+      url: "/ports/suggest.json", // change to full path of file on server
+      dataType: "json",
+      success: function(data){
+        for (var x in data) {
+          var subData = data[x];
+          suggestArr.push({
+            portId: subData.portId,
+            value: subData.value,
+            lat: subData.lat,
+            lon: subData.lon
+          });
+        }
+      },
+      complete: setupAC,
+      failure: function (data) {
+        console.log("XML File could not be found");
+      }
+    });
+
+    function setupAC(){
       $("input#custom_start_address").autocomplete({
-        source: function (request, response) {
-          autoCompleteSource(request);
-          response(suggestArr);
-        },
-        minLength: 4,
+        source: suggestArr,
+        minLength: 3,
         select: function (event, ui) {
           event.preventDefault();
-          $("input#itinerary_start_port_id").val(ui.item.value);
-          $("input#custom_start_address").val(ui.item.label);
-          $("#start_coords").html('Coords: '+ui.item.lat+', '+ui.item.lon);
+          $("input#itinerary_start_port_id").val(ui.item.portId);
+          $("input#custom_start_address").val(ui.item.value);
+          $("#start_coords").html('Coords: ' + ui.item.lat + ', ' + ui.item.lon);
           suggestArr = [];
-          setStartMarker(ui.item.lat, ui.item.lon, ui.item.label);
+          setStartMarker(ui.item.lat, ui.item.lon, ui.item.value);
         }
       });
 
       $("input#custom_end_address").autocomplete({
-        source: function(request, response) {
-          autoCompleteSource(request);;
-          response (suggestArr);
-        },
-        minLength: 4,
+        source: suggestArr,
+        minLength: 3,
         select: function (event, ui) {
           event.preventDefault();
-          $("input#itinerary_end_port_id").val(ui.item.value);
-          $("input#custom_end_address").val(ui.item.label);
-          $("#end_coords").html('Coords: '+ui.item.lat+', '+ui.item.lon);
+          $("input#itinerary_end_port_id").val(ui.item.portId);
+          $("input#custom_end_address").val(ui.item.value);
+          $("#end_coords").html('Coords: ' + ui.item.lat + ', ' + ui.item.lon);
           suggestArr = [];
           setEndMarker(ui.item.lat, ui.item.lon, ui.item.label);
         }
       });
+    }
 
-      function autoCompleteSource(request){
+    $("#get-route").click(function () {
+      var startPort = document.getElementById('itinerary_start_port_id').value;
+      var endPort = document.getElementById('itinerary_end_port_id').value;
+      if(startPort == '' || endPort == '')
+        alert('Please choose Start and End addresses for your itinerary.')
+      else{
+        document.getElementById("itineraries-spinner").className = "";
         $.ajax({
           type: "GET",
-          url: "/ports/suggest.json?sp=" + request.term, // change to full path of file on server
+          url: "/ports/route.json?fport=" + startPort + "&tport=" + endPort, // change to full path of file on server
           dataType: "json",
-          success: parseJson,
+          success: function(data){
+            $("#distance").html(data.distance);
+            $("#duration").html(data.duration);
+            drawRoute(data.coords);
+          },
           failure: function (data) {
             console.log("XML File could not be found");
           }
         });
       }
-
-      function parseJson(data) {
-        var count = data.length;
-        suggestArr = [];
-        for (var i = 0; i < count; i++) {
-          suggestArr.push({
-            label: data[i].name+' - '+data[i].nationality,
-            value: data[i].portId,
-            lat: data[i].lat,
-            lon: data[i].lon
-          });
-        }
-      }
-
-
-      $("#get-route").click(function () {
-        var startPort = document.getElementById('itinerary_start_port_id').value;
-        var endPort = document.getElementById('itinerary_end_port_id').value;
-        if(startPort == '' || endPort == '')
-          alert('Please choose Start and End addresses for your itinerary.')
-        else{
-          document.getElementById("itineraries-spinner").className = "";
-          $.ajax({
-            type: "GET",
-            url: "/ports/route.json?fport=" + startPort + "&tport=" + endPort, // change to full path of file on server
-            dataType: "json",
-            success: function(data){
-              $("#distance").html(data.distance);
-              $("#duration").html(data.duration);
-              drawRoute(data.coords);
-            },
-            failure: function (data) {
-              console.log("XML File could not be found");
-            }
-          });
-        }
-      });
+    });
 
   });

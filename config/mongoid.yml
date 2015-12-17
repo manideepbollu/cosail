@@ -1,7 +1,9 @@
 development:
   clients:
-    default:
-      uri: 'mongodb://heroku_wrffhs66:slrt5bta1c4vtc6a0kvejcfjeq@ds061354.mongolab.com:61354/heroku_wrffhs66'
+      default:
+        database: test
+        hosts:
+          - localhost:27017
 
 test:
   clients:
