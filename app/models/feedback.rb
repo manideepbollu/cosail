@@ -2,7 +2,7 @@ class Feedback
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  TYPE = %w(bug idea)
+  TYPE = %w(bug idea location)
   STATUS = ['open', 'fixed', 'in progress', 'not applicable']
 
   belongs_to :user

@@ -19,10 +19,13 @@
     .form-group
       = f.default_tag :button, t('.get_route'), type: 'button', class: 'btn btn-primary', id: 'get-route'
       = image_tag 'ajax-spinner-24x17.gif', width: 24, height: 17, alt: '...', id: 'itineraries-spinner', class: 'hide'
+    small.text-muted
+      = 'If you are not able to find the location you want, please raise it to us. We are working hard to push in as many locations as possible. '
+      = link_to 'Feedback', feedbacks_path
     #error.alert.alert-danger
   .col-sm-8
     #new-itinerary-map.google-maps
-    | <small class='map-credits pull-right'>Powered by <a href='http://www.vesseltracker.com'>VesselTracker</a></small>
+    | <small class='map-credits pull-right'>Powered by <a href='http://www.vesseltracker.com' target='_blank'>VesselTracker</a></small>
 .row
   .col-sm-4
     h3
