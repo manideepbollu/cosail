@@ -22,18 +22,27 @@
             <div class="row dashboard_description"">
             <span><%= itinerary.description %></span>
           </div>
+          <div class="row text-muted pull-right">
+            <i>Leaving on <%= l(itinerary.leave_date.in_time_zone, format: :short) %></i>
+          </div>
         </div>
         <div class="col-sm-2 text-center dashboard_itinerary_icons">
           <% if itinerary.pink %>
-              <i class="fa fa-lock" title="Two way trip"></i><br>
+              <i class="fa fa-lock" title="Female only trip"></i>
           <% end %>
           <% if itinerary.daily %>
-              <i class="fa fa-repeat" title="Two way trip"></i><br>
+              <i class="fa fa-repeat" title="Daily trip"></i>
           <% end %>
           <% if itinerary.round_trip %>
-              <i class="fa fa-exchange" title="Two way trip"></i><br>
+              <i class="fa fa-exchange" title="Two way trip"></i>
           <% end %>
-          <i>Leaves on <%= l(itinerary.leave_date.in_time_zone, format: :short) %></i>
+          <% if !itinerary.smoking_allowed %>
+              <i class="fa flaticon-no-smoking2" title="Smoking not allowed"></i>
+          <% end %>
+          <% if !itinerary.pets_allowed %>
+              <i class="fa flaticon-dog7" title="Pets not allowed"></i><br>
+          <% end %>
+          <span class="text-muted m-t-lg"><strong>Price: </strong> 180<%= APP_CONFIG.currency %></span>
           <%= link_to "More Info", itinerary_path(itinerary), class: "btn btn-primary" %>
         </div>
         </div>
