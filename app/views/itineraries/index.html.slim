@@ -6,5 +6,12 @@
       == render 'search'
       #error.alert.alert-danger
     .col-sm-8
-      #index-itineraries-map.google-maps
+      #new-itinerary-map.google-maps
       #itineraries-thumbs.row
+  h3= 'Search Results'
+  .row#search-results-new
+    == render 'itineraries/table_new', itineraries: @latest_itineraries, edit: false if !@latest_itineraries.nil?
+
+  | <script async defer
+              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkEQUnCf2y4-7L8ONawU_mmO5hJsXCmzg&libraries=geometry&callback=initMap">
+            </script>

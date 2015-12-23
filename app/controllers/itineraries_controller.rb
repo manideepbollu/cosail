@@ -12,7 +12,7 @@ class ItinerariesController < ApplicationController
   end
 
   def index
-    #@itineraries = Itinerary.includes(:user).all
+    @itineraries = Itinerary.new
   end
 
   def show
@@ -26,6 +26,8 @@ class ItinerariesController < ApplicationController
     if @itinerary.save
       redirect_to itinerary_path(@itinerary), flash: { success: t('flash.itineraries.success.create') }
     else
+      @itinerary.start_address = ''
+      @itinerary.end_address = ''
       render :new
     end
   end
@@ -50,7 +52,26 @@ class ItinerariesController < ApplicationController
   end
 
   def search
-    @itineraries = ItinerarySearch.new(params[:itineraries_search], current_user).itineraries
+    @selected = Itinerary.find_by(start_address: 'Chennai, India')
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def new_search
+    itinerary_entries = params[:itinerary]
+    @selected = Itinerary.all
+    @selected = @selected.where(start_address: params[:start_address]) unless params[:start_address] == ''
+    @selected = @selected.where(end_address: params[:end_address]) unless params[:end_address] == ''
+    @selected = @selected.where(pink: true) if params[:toggle_tracker] == 'true' && itinerary_entries[:pink] == '1'
+    @selected = @selected.where(round_trip: true) if params[:toggle_tracker] == 'true' && itinerary_entries[:round_trip] == '1'
+    @selected = @selected.where(smoking_allowed: true) if params[:toggle_tracker] == 'true' && itinerary_entries[:smoking_allowed] == '1'
+    @selected = @selected.where(pets_allowed: true) if params[:toggle_tracker] == 'true' && itinerary_entries[:pets_allowed] == '1'
+
+    respond_to do |format|
+      format.js { render 'new_search' }
+      format.html { render 'new_search' }
+    end
   end
 
   protected

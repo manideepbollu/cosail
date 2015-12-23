@@ -1,26 +1,21 @@
-= bootstrap_form_for Itineraries::Search.new, url: search_itineraries_path, method: :post, validate: true, remote: true do |f|
-  = f.text_field :from, label: Itinerary.human_attribute_name(:start_address)
-  = f.text_field :to, label: Itinerary.human_attribute_name(:end_address)
+= bootstrap_form_for @itineraries, url: search_itineraries_new_path, method: :post, validate: false, remote: true do |f|
+  = f.text_field :start_address, name: 'start_address', label: Itinerary.human_attribute_name(:start_address), id: 'itinerary_start_address'
+  = f.text_field :end_address, name: 'end_address', label: Itinerary.human_attribute_name(:end_address), id: 'itinerary_end_address'
   = link_to '#', id: 'search-form-advanced-link' do
-    span.fa.fa-chevron-up<>
+    span.fa.fa-chevron-down<>
     = t('.advanced_search')
+    = f.hidden_field :route_path, name: 'toggle_tracker', id: 'toggle-tracker'
   #search-form-advanced
     .form-group
       - if current_user.female?
-        = f.check_box :filter_pink, label: Itinerary.human_attribute_name(:pink)
+        = f.check_box :pink, name: 'pink', label: Itinerary.human_attribute_name(:pink)
         .checkbox
           p.help-block
             span.fa.fa-lock<>
             = t('itineraries.form.pink_help')
-      = f.check_box :filter_verified, label: t('.verified_users')
-      = f.check_box :filter_round_trip, label: Itinerary.human_attribute_name(:round_trip)
-    - for boolean_field in [:smoking_allowed, :pets_allowed]
-      = f.select "filter_#{boolean_field}".to_sym, boolean_options_for_select, { include_blank: true }, class: 'input-sm form-control', label: Itinerary.human_attribute_name(boolean_field)
-    = f.select :filter_driver_gender, options_for_array_collection(User, :gender), { include_blank: true }, class: 'input-sm form-control', label: Itinerary.human_attribute_name(:driver_gender)
+      = f.check_box :round_trip, label: Itinerary.human_attribute_name(:round_trip)
+      = f.check_box :smoking_allowed, label: Itinerary.human_attribute_name(:smoking_allowed)
+      = f.check_box :pets_allowed, label: Itinerary.human_attribute_name(:pets_allowed)
   .form-group
-    = f.hidden_field :start_location_lat
-    = f.hidden_field :start_location_lng
-    = f.hidden_field :end_location_lat
-    = f.hidden_field :end_location_lng
-    = f.default_tag :button, t('.search'), type: 'button', class: 'btn btn-primary', id: 'itineraries-search', data: { disable_with: t('helpers.disable_with') }
+    = f.default_tag :button, t('.search'), type: 'submit', class: 'btn btn-primary', id: 'itineraries-search'
     = image_tag 'ajax-spinner-24x17.gif', width: 24, height: 17, alt: '...', id: 'itineraries-spinner', class: 'hide'

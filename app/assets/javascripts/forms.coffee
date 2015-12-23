@@ -35,3 +35,4 @@ $(document).on 'click', '#search-form-advanced-link', (e) ->
     $(me).find('span.fa')
       .toggleClass('fa-chevron-up')
       .toggleClass('fa-chevron-down')
+

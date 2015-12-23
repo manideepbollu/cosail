@@ -1,0 +1,41 @@
+<% @selected.each do |itinerary| %>
+
+    <div class="row dashboard_cards">
+      <div class="col-sm-2 text-center img-rounded">
+        <%= user_profile_picture itinerary.user, size: [100, 100], type: 'large', style: nil, opts: {class: 'dashboard_cards_img img-circle'} %>
+        <br>
+        <span><%= itinerary.user %></span><br><br>
+      </div>
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col-xs-6">
+            <h4 class="itinerary-title">
+              <small>From:</small> <%= itinerary.start_address %>
+            </h4>
+          </div>
+          <div class="col-xs-6">
+            <h4 class="itinerary-title">
+              <small>To:</small> <%= itinerary.end_address %>
+            </h4>
+          </div>
+        </div>
+        <div class="row dashboard_description"">
+        <span><%= itinerary.description %></span>
+      </div>
+    </div>
+    <div class="col-sm-2 text-center dashboard_itinerary_icons">
+      <% if itinerary.pink %>
+          <i class="fa fa-lock" title="Two way trip"></i><br>
+      <% end %>
+      <% if itinerary.daily %>
+          <i class="fa fa-repeat" title="Two way trip"></i><br>
+      <% end %>
+      <% if itinerary.round_trip %>
+          <i class="fa fa-exchange" title="Two way trip"></i><br>
+      <% end %>
+      <i>Leaves on <%= l(itinerary.leave_date.in_time_zone, format: :short) %></i>
+      <%= link_to "More Info", itinerary_path(itinerary), class: "btn btn-primary" %>
+    </div>
+    </div>
+
+<% end %>

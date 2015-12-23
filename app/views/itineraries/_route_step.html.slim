@@ -1,9 +1,9 @@
 .row
   .col-sm-4
-    = f.text_field :start_address, id: 'custom_start_address', autocomplete: 'off'
+    = f.text_field :start_address, autocomplete: 'off'
     .coords id='start_coords'
       = 'Coordinates: '
-    = f.text_field :end_address, id: 'custom_end_address', autocomplete: 'off'
+    = f.text_field :end_address, autocomplete: 'off'
     .coords id='end_coords'
       = 'Coordinates: '
     = f.hidden_field :start_port_id
@@ -14,6 +14,8 @@
       br
       = t('.duration')
       b#duration<
+    #incomplete-setup.alert.alert-info.hide
+      = 'Please setup a route to continue further'
     .form-group
       = f.default_tag :button, t('.get_route'), type: 'button', class: 'btn btn-primary', id: 'get-route'
       = image_tag 'ajax-spinner-24x17.gif', width: 24, height: 17, alt: '...', id: 'itineraries-spinner', class: 'hide'
@@ -39,82 +41,3 @@
       = t('.hint_search_before_title')
     p
       = t('.hint_search_before_content', search_link: (link_to t('.search_link'), itineraries_path)).html_safe
-
-javascript:
-  $(document).ready(function() {
-
-    var suggestArr = [];
-
-    $.ajax({
-      type: "GET",
-      url: "/ports/suggest.json", // change to full path of file on server
-      dataType: "json",
-      success: function(data){
-        for (var x in data) {
-          var subData = data[x];
-          suggestArr.push({
-            portId: subData.portId,
-            value: subData.value,
-            lat: subData.lat,
-            lon: subData.lon
-          });
-        }
-      },
-      complete: setupAC,
-      failure: function (data) {
-        console.log("XML File could not be found");
-      }
-    });
-
-    function setupAC(){
-      $("input#custom_start_address").autocomplete({
-        source: suggestArr,
-        minLength: 3,
-        select: function (event, ui) {
-          event.preventDefault();
-          $("input#itinerary_start_port_id").val(ui.item.portId);
-          $("input#custom_start_address").val(ui.item.value);
-          $("#start_coords").html('Coords: ' + ui.item.lat + ', ' + ui.item.lon);
-          suggestArr = [];
-          setStartMarker(ui.item.lat, ui.item.lon, ui.item.value);
-        }
-      });
-
-      $("input#custom_end_address").autocomplete({
-        source: suggestArr,
-        minLength: 3,
-        select: function (event, ui) {
-          event.preventDefault();
-          $("input#itinerary_end_port_id").val(ui.item.portId);
-          $("input#custom_end_address").val(ui.item.value);
-          $("#end_coords").html('Coords: ' + ui.item.lat + ', ' + ui.item.lon);
-          suggestArr = [];
-          setEndMarker(ui.item.lat, ui.item.lon, ui.item.label);
-        }
-      });
-    }
-
-    $("#get-route").click(function () {
-      var startPort = document.getElementById('itinerary_start_port_id').value;
-      var endPort = document.getElementById('itinerary_end_port_id').value;
-      if(startPort == '' || endPort == '')
-        alert('Please choose Start and End addresses for your itinerary.')
-      else{
-        document.getElementById("itineraries-spinner").className = "";
-        $.ajax({
-          type: "GET",
-          url: "/ports/route.json?fport=" + startPort + "&tport=" + endPort, // change to full path of file on server
-          dataType: "json",
-          success: function(data){
-            $("#distance").html(data.distance);
-            $("#duration").html(data.duration);
-            drawRoute(data.coords);
-          },
-          failure: function (data) {
-            console.log("XML File could not be found");
-          }
-        });
-      }
-    });
-
-  });

@@ -1,26 +1,36 @@
 @font-face {
-	font-family: "ship18";
-	src: font-url("flaticon.eot");
-	src: font-url("flaticon.eot?#iefix") format("embedded-opentype"),
-	font-url("flaticon.woff") format("woff"),
-	font-url("flaticon.ttf") format("truetype"),
-	font-url("flaticon.svg#ship18") format("svg");
-	font-weight: normal;
-	font-style: normal;
+  font-family: "Flaticon";
+  src: url("flaticon.eot");
+  src: url("flaticon.eot#iefix") format("embedded-opentype"),
+  url("flaticon.woff") format("woff"),
+  url("flaticon.ttf") format("truetype"),
+  url("flaticon.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
 }
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
-[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
-	font-family: ship18;
-font-style: normal;
-margin-left: 20px;
-}
-
-.flaticon-ship18-150:before {
-	content: "\e000";
-	 font-size: 150px;
-}
-
-.flaticon-ship18-70:before {
-	 content: "\e000";
-	 font-size: 70px;
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {
+  font-family: Flaticon;
+  font-size: 20px;
+  font-style: normal;
+  margin-left: 20px;
+}.flaticon-boat17:before {
+   content: "\e000";
  }
+.flaticon-sailing-boat:before {
+  content: "\e001";
+}
+.flaticon-ship18:before {
+  content: "\e002";
+}
+.flaticon-ship18-150:before {
+  content: "\e002";
+  font-size: 150px;
+}
+
+@media (max-width: 768px){
+  .flaticon-ship18-150:before {
+    font-size: 56px;
+    margin-left: 0px;
+  }
+}

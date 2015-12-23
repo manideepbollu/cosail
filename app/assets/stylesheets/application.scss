@@ -50,3 +50,43 @@
 .input-group-edituser {
   max-width: 300px;
 }
+
+.dashboard_cards {
+  padding: 20px;
+  border-top: 1px solid lightgrey;
+}
+
+.dashboard_cards_img {
+  width: 100px;
+  margin: 0 0 10px 0;
+}
+
+.dashboard_description {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #18f8f8;
+  span {
+    font-size: small;
+  }
+}
+
+.dashboard_itinerary_icons {
+  i.fa {
+    margin: 10px 10px 10px 10px;
+    font-size: x-large;
+    color: #666;
+  }
+  i{
+    color: #666;
+    font-size: x-small;
+  }
+}
+
+#dummy_dashboard_card {
+  padding: 50px;
+  margin: 30px;
+  background-color: #18f8f8;
+  border-radius: 10px;
+}
+

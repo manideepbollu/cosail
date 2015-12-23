@@ -55,4 +55,6 @@ Rails.application.routes.draw do
   get :fbjssdk_channel, to: 'pages#fbjssdk_channel'
   post :report_uri, to: 'pages#report_uri'
 
+  post :search_itineraries_new, to: 'itineraries#new_search'
+
 end

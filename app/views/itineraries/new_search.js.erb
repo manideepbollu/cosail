@@ -1,0 +1,2 @@
+$("#search-results-new").html("<%= escape_javascript(render 'itineraries/table_new', itineraries: @selected, edit: false) %>");
+document.getElementById("itineraries-spinner").className = "hide";

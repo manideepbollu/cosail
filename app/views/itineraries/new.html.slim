@@ -1,74 +1,3 @@
-javascript:
-  var startMarker;
-  var endMarker;
-  var map;
-  var totalMarkers = [];
-  var routePath;
-
-  function initMap() {
-    map = new google.maps.Map(document.getElementById('new-itinerary-map'), {
-      center: {lat: -34.397, lng: 150.644},
-      zoom: 5,
-      maxZoom: 10
-    });
-  }
-
-  function setStartMarker(lat, lon, label) {
-    var latLng = {lat: lat, lng: lon};
-    map.setCenter(latLng);
-    if (startMarker != null)
-      startMarker.setMap(null);
-    startMarker = new google.maps.Marker({
-      position: latLng,
-      map: map,
-      title: label,
-      animation: google.maps.Animation.DROP
-    });
-    adjustBoundaries();
-  }
-
-  function setEndMarker(lat, lon, label) {
-    var latLng = {lat: lat, lng: lon};
-    map.setCenter(latLng);
-    if (endMarker != null)
-      endMarker.setMap(null);
-    endMarker = new google.maps.Marker({
-      position: latLng,
-      map: map,
-      title: label,
-      animation: google.maps.Animation.DROP
-    });
-    adjustBoundaries();
-  }
-
-  function adjustBoundaries() {
-    var bounds = new google.maps.LatLngBounds();
-    if (startMarker != null)
-      bounds.extend(startMarker.getPosition());
-    if (endMarker != null)
-      bounds.extend(endMarker.getPosition());
-    map.fitBounds(bounds);
-    if (routePath != null)
-      routePath.setMap(null);
-  }
-
-  function drawRoute(data) {
-    var routeCoordinates = data;
-    adjustBoundaries();
-    routePath = new google.maps.Polyline({
-      path: routeCoordinates,
-      geodesic: true,
-      strokeColor: '#FF0000',
-      strokeOpacity: 1.0,
-      strokeWeight: 2
-    });
-    routePath.setMap(map);
-    document.getElementById("itineraries-spinner").className = "hide";
-    $("#result").slideDown("slow", function () {
-      // Animation complete.
-    });
-  }
-
 - title t('.title')
 .container
   - if @itinerary.errors.any?
@@ -86,11 +15,11 @@ javascript:
     .col-sm-6
       #wizard-step-2-title.itinerary-step.hidden-xs
         h3= t('.insert_details_and_confirm')
-  = bootstrap_form_for @itinerary, validate: true do |f|
+  = bootstrap_form_for @itinerary, validate: false do |f|
     .form-group
       #wizard-step-1-content data-step='1'
         == render 'route_step', f: f
-      #wizard-step-2-content data-step='2'
+      #wizard-step-2-content.hide data-step='2'
         .row
           .col-sm-4
             = image_tag transparent_gif_image_data, class: 'img-responsive google-static-map', id: 'itinerary-preview-image', alt: ''
@@ -103,12 +32,13 @@ javascript:
         == render 'form', f: f
         .text-center= share_on_facebook_timeline_checkbutton(f)
     .form-group.text-center
-      = f.hidden_field :route
-      = f.hidden_field :via_waypoints
+      = f.hidden_field :start_coords
+      = f.hidden_field :end_coords
+      = f.hidden_field :route_path
       .btn-toolbar
-        = button_tag t('.previous_step'), type: 'button', class: 'btn btn-lg btn-default', name: 'back_button', id: 'wizard-prev-step-button', disabled: true
+        = button_tag t('.previous_step'), type: 'button', class: 'btn btn-lg btn-default hide', name: 'back_button', id: 'wizard-prev-step-button'
         = f.submit t('.next_step'), type: 'button', class: 'btn btn-lg btn-primary', name: 'next_button', id: 'wizard-next-step-button', disabled: false
-        = f.submit t('.confirm_and_share'), class: 'btn btn-lg btn-primary', id: 'new_itinerary_submit', disabled: true, data: { disable_with: t('helpers.disable_with') }
+        = f.submit t('.confirm_and_share'), class: 'btn btn-lg btn-primary hide', id: 'new_itinerary_submit', data: { disable_with: t('helpers.disable_with') }
 | <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkEQUnCf2y4-7L8ONawU_mmO5hJsXCmzg&callback=initMap">
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkEQUnCf2y4-7L8ONawU_mmO5hJsXCmzg&libraries=geometry&callback=initMap">
           </script>

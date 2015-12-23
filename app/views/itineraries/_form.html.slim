@@ -47,26 +47,26 @@
                   = check_box_tag 'edit-all-times', nil, checked: true
                   = t('.edit_all_times')
 
-  .form-group class=('has-error' if @itinerary.errors.include?(:fuel_cost))
-    = f.label :fuel_cost, class: 'control-label col-sm-2'
+  .form-group class=('has-error' if @itinerary.errors.include?(:price))
+    = f.label :price, class: 'control-label col-sm-2'
     .col-sm-10
       .input-group.input-group-number
-        = f.default_tag :text_field, :fuel_cost, class: 'form-control'
+        = f.default_tag :text_field, :price, class: 'form-control'
         span.input-group-addon= APP_CONFIG.currency
-      - if @itinerary.errors.include?(:fuel_cost)
+      - if @itinerary.errors.include?(:price)
         span.help-inline
-          = @itinerary.errors.messages[:fuel_cost].join(', ')
+          = @itinerary.errors.messages[:price].join(', ')
       p.help-block#fuel-help data-avg-consumption=current_user.vehicle_avg_consumption
         span#fuel-help-text
-  .form-group class=('has-error' if @itinerary.errors.include?(:tolls))
-    = f.label :tolls, class: 'control-label col-sm-2'
+  .form-group class=('has-error' if @itinerary.errors.include?(:days_at_sea))
+    = f.label :days_at_sea, class: 'control-label col-sm-2'
     .col-sm-10
       .input-group.input-group-number
-        = f.default_tag :text_field, :tolls, class: 'form-control'
-        span.input-group-addon= APP_CONFIG.currency
-      - if @itinerary.errors.include?(:tolls)
+        = f.default_tag :text_field, :days_at_sea, class: 'form-control'
+        span.input-group-addon= 'days'
+      - if @itinerary.errors.include?(:days_at_sea)
         span.help-inline
-          = @itinerary.errors.messages[:tolls].join(', ')
+          = @itinerary.errors.messages[:days_at_sea].join(', ')
   .form-group class=('has-error' if @itinerary.errors.include?(:description))
     = f.label :description, class: 'control-label col-sm-2'
     .col-sm-10

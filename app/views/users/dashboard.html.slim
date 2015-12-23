@@ -12,7 +12,8 @@
         = t('.new_itinerary')
     li
       = link_to itineraries_user_path(current_user) do
-        span.fa.fa-road<>
+        span.fa.flaticon-sailing-boat<>
         = t('.your_itineraries')
   h3= t('.latest_itineraries')
-  == render 'itineraries/table', itineraries: @latest_itineraries, edit: false
+  == render 'itineraries/table_new', itineraries: @latest_itineraries, edit: false
+

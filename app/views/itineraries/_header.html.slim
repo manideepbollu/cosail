@@ -6,14 +6,14 @@
   .col-sm-6
     .media#user-media
       = link_to user_path(@itinerary.user), class: 'pull-left' do
-        = user_profile_picture @itinerary.user, style: 'media-object'
+        = user_profile_picture @itinerary.user, size: [70, 70], type: 'large', style: nil, opts: {class: 'img-circle'}
       .media-body
         h4.media-heading
           - if user_signed_in?
             = link_to @itinerary.user, user_path(@itinerary.user)
           - else
             = t('.app_user', appname: APP_CONFIG.app_name)
-        p.pre-line= @itinerary.description
+        p.text-muted= @itinerary.description
     .tag-list
       span.tag.tag-icare= Itinerary.human_attribute_name :start_address
       span.tag= @itinerary.start_address
@@ -31,8 +31,8 @@
           span.tag= l(@itinerary.return_date, format: :long)
     .tag-list
       span.tag.tag-icare= t('.expenses_to_share')
-      span.tag #{Itinerary.human_attribute_name(:fuel_cost)}: #{@itinerary.fuel_cost}#{APP_CONFIG.currency}
-      span.tag #{Itinerary.human_attribute_name(:tolls)}: #{@itinerary.tolls}#{APP_CONFIG.currency}
+      span.tag #{Itinerary.human_attribute_name(:price)}: #{@itinerary.price}#{APP_CONFIG.currency}
+      span.tag #{Itinerary.human_attribute_name(:days_at_sea)}: #{@itinerary.days_at_sea} days
     .tag-list
       - if @itinerary.pink?
         span.tag.tag-pink rel='tooltip' title=t('itineraries.form.pink_help')
