@@ -42,7 +42,7 @@
           <% if !itinerary.pets_allowed %>
               <i class="fa flaticon-dog7" title="Pets not allowed"></i><br>
           <% end %>
-          <span class="text-muted m-t-lg"><strong>Price: </strong> 180<%= APP_CONFIG.currency %></span>
+          <span class="text-muted m-t-lg"><strong>Price: </strong><%= itinerary.price %><%= APP_CONFIG.currency %></span>
           <%= link_to "More Info", itinerary_path(itinerary), class: "btn btn-primary" %>
         </div>
         </div>
