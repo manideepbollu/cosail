@@ -19,6 +19,10 @@ html,
 
   .btn-toolbar {
     display: inline-block;
+    min-width: 300px;
+    .btn-lg {
+      width: 100%;
+    }
   }
 }
 
@@ -95,7 +99,7 @@ html,
   @extend .btn-signin;
   border: 2px solid fade-out(white, 0.75);
   color: white;
-  background-color: fade-out(black, 0.85);
+  background-color: fade-out(black, 0.65);
   &:hover,
   &:focus {
     border-color: fade-out(white, 0.6);

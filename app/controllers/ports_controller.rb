@@ -24,8 +24,9 @@ class PortsController < ApplicationController
     ends = '\u003cbr'
     formatted_distance = html_response[/#{starts}(.*?)#{ends}/m, 1]
     starts = 'Journey time:\u003c/b\u003e '
-    formatted_duration = html_response[/#{starts}(.*?)#{ends}/m, 1]
-
+    net_distance = formatted_distance.delete(' nm').to_f
+    duration = (net_distance/100)*24
+    formatted_duration = (duration/24).to_i.to_s+' days, '+(duration%24).to_i.to_s+' hrs'
     final_hash = {distance: formatted_distance, duration: formatted_duration}
 
     xml_url = URI.parse('http://www.vesseltracker.com/app?component=%24RoutingOSMPolygone.%24XTile&page=RoutingVD&service=xtile')

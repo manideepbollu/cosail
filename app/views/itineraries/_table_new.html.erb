@@ -20,7 +20,7 @@
               </div>
             </div>
             <div class="row dashboard_description"">
-            <span><%= itinerary.description %></span>
+            <span><%= itinerary.description[0..350].gsub(/\s\w+\s*$/,'...') %></span>
           </div>
           <div class="row text-muted pull-right">
             <i>Leaving on <%= l(itinerary.leave_date.in_time_zone, format: :short) %></i>

@@ -244,7 +244,7 @@ en-US:
       account_settings: Account Settings
       general_information: General info
       vehicle_information: Vehicle info
-      user_profile_details: Profile details are updated from Facebook after each login.
+      user_profile_details: If you are using your Facebook account while logging into CoSail, your profile details will be in sync with Facebook.
       vehicle_avg_consumption_help: Use a point to separate decimals. This value is used in the fuel cost estimate when creating a new itinerary.
       vehicle_avg_consumption_note: "Note: Write in this field the %{fuel} value of %{proportional_costs} table"
       fuel: Fuel
@@ -296,7 +296,7 @@ en-US:
     route_step:
       get_route: Get route
       distance: Distance
-      duration: Duration
+      duration: Approximate duration
       hint_privacy_title: "A little bit of privacy"
       hint_privacy_content: "Are you concerned of your privacy? Do not be too specific in setting the path. Select major streets near the point of departure and the point of destination."
       hint_customize_title: "Customize your itinerary"
