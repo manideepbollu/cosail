@@ -28,7 +28,6 @@
         = reference_tags @user
         = link_to t('.see_all'), user_references_path(@user), class: 'tag'
         .tag.tag-facebook= t('.basic_info')
-        .tag= t('.friends', count: friends_with_privacy(@user.facebook_friends.size))
         .tag= t('.age', count: @user.age)
         .tag= @user.gender
         = language_tags @user

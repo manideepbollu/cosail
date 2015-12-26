@@ -2,7 +2,7 @@ footer
   .container
     ul.list-inline.list-footer
       li.diowa-footer
-        = link_to 'http://cosail.herokuapp.com' do
+        = link_to dashboard_path do
           = image_tag cosail_footer_logo, alt: 'diowa', width: 70, title: 'CoSail'
       - if user_signed_in?
         li
