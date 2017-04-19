@@ -1,16 +1,13 @@
-# icare
+# Cosail
 [![Build Status](https://secure.travis-ci.org/diowa/icare.svg?branch=master)](https://travis-ci.org/diowa/icare) [![Dependency Status](https://gemnasium.com/diowa/icare.svg)](https://gemnasium.com/diowa/icare) [![Code Climate](https://codeclimate.com/github/diowa/icare/badges/gpa.svg)](https://codeclimate.com/github/diowa/icare) [![Coverage Status](https://coveralls.io/repos/diowa/icare/badge.svg?branch=master)](https://coveralls.io/r/diowa/icare?branch=master)
-
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/diowa/icare?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-**icare** is an open source [carpooling](http://en.wikipedia.org/wiki/Carpool) platform used as a basis for our commercial product [Company Carpool](http://www.companycarpool.com).
+**Cosail** is an open source [boat-ride sharing](https://en.wikipedia.org/wiki/Boat_sharing) platform, inspired from [Company Carpool](http://www.companycarpool.com).
 
-Carpooling (also known as car-sharing, ride-sharing, lift-sharing and covoiturage), is the sharing of car journeys so that more than one person travels in a car.
-By having more people using one vehicle, carpooling reduces each person’s travel costs such as fuel costs, tolls, and the stress of driving. Carpooling is also seen as a more environmentally friendly and sustainable way to travel as sharing journeys reduces carbon emissions, traffic congestion on the roads, and the need for parking spaces. Authorities often encourage carpooling, especially during high pollution periods and high fuel prices. (From Wikipedia)
+Boat sharing is the sharing of boat rides so that more than one person can travel in a boat which reduces the costs of hiring a boat.
 
-**icare** uses the following technologies:
+**Cosail** uses the following technologies:
 
 * [Ruby on Rails][1]
 * [CoffeeScript][3]
@@ -47,26 +44,19 @@ By having more people using one vehicle, carpooling reduces each person’s trav
  [15]: http://github.com/lukeredpath/simpleconfig
  [16]: http://github.com/airbrake/airbrake
 
-A working demo is available at http://icare.diowa.com/
+A working demo is available at http://cosail.herokuapp.com/
 
 
 
 ## Name and logo
 
-**icare** name and logo are temporary. **icare** is a portmanteau of "I care", "Car" and "Environment". No copyright violation is intended.
-
-
-
-## Roadmap
-
-Immediate: Check out our [To Do](http://github.com/diowa/icare/wiki/To-Do) list.
-Long-term: TODO
+**Cosail** name and logo are temporary.
 
 
 
 ## Internationalization (i18n)
 
-**icare** uses standard [Rails Internationalization (I18n) API](http://guides.rubyonrails.org/i18n.html). If you translated **icare** in your own language, make a pull request.
+**Cosail** uses standard [Rails Internationalization (I18n) API](http://guides.rubyonrails.org/i18n.html). If you translated **Cosail** in your own language, make a pull request.
 
 
 
@@ -78,27 +68,26 @@ More over, if your pull request contains patches or features, you must include r
 
 Editor preferences are available in the [editor config](.editorconfig) for easy use in common text editors. Read more and download plugins at <http://editorconfig.org>.
 
-If you are interested in feature development, we have priorities. Check out our [To Do](http://github.com/diowa/icare/wiki/To-Do) list.
+If you are interested in feature development, we have priorities. Check out our [To Do](https://github.com/manideepbollu/cosail.git) list.
 
 
 
 ## Authors
 
-**Geremia Taglialatela**
+**Manideep Bollu**
 
-+ http://github.com/tagliala
-+ http://twitter.com/gtagliala
++ https://github.com/manideepbollu
++ http://manideepbollu.com
 
-**Cesidio Di Landa**
+**Antek Mecler**
 
-+ http://github.com/cesidio
-+ http://twitter.com/cesid
++ https://github.com/ametzler33
 
 
 
 ## Copyright and license
 
-**icare** is licensed under the BSD 2-Clause License
+**Cosail** is licensed under the BSD 2-Clause License
 
 Check the LICENSE file for more information
 
@@ -107,11 +96,3 @@ Check the LICENSE file for more information
 ## Thanks
 
 Special thanks to all developers of open source libraries used in this project.
-
-
-
-## Donations
-
-If you like this project or you are considering to use it (or any part of it) for commercial purposes, please make a donation to the authors.
-
-[![Click here to lend your support to: icare: Ruby on Rails open source carpooling platform and make a donation at pledgie.com !](https://pledgie.com/campaigns/18177.png?skin_name=chrome)](https://pledgie.com/campaigns/18177)
