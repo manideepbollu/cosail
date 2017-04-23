@@ -1,5 +1,4 @@
 # Cosail
-[![Build Status](https://secure.travis-ci.org/diowa/icare.svg?branch=master)](https://travis-ci.org/diowa/icare) [![Dependency Status](https://gemnasium.com/diowa/icare.svg)](https://gemnasium.com/diowa/icare) [![Code Climate](https://codeclimate.com/github/diowa/icare/badges/gpa.svg)](https://codeclimate.com/github/diowa/icare) [![Coverage Status](https://coveralls.io/repos/diowa/icare/badge.svg?branch=master)](https://coveralls.io/r/diowa/icare?branch=master)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
@@ -68,8 +67,6 @@ More over, if your pull request contains patches or features, you must include r
 
 Editor preferences are available in the [editor config](.editorconfig) for easy use in common text editors. Read more and download plugins at <http://editorconfig.org>.
 
-If you are interested in feature development, we have priorities. Check out our [To Do](https://github.com/manideepbollu/cosail.git) list.
-
 
 
 ## Authors
@@ -82,15 +79,6 @@ If you are interested in feature development, we have priorities. Check out our 
 **Antek Mecler**
 
 + https://github.com/ametzler33
-
-
-
-## Copyright and license
-
-**Cosail** is licensed under the BSD 2-Clause License
-
-Check the LICENSE file for more information
-
 
 
 ## Thanks
